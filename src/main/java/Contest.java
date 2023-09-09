@@ -1,13 +1,11 @@
-import Members.TeamMember;
-import Team.Team;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.springframework.boot.SpringApplication;
 
-import java.net.URI;
-
-public class Main {
+public class Contest {
     public static void main(String[] args) {
-        URI uri = URI.create("http://ya.praktikum.fvds.ru:8080/dev-day/register");
+
+        SpringApplication.run(Contest.class, args);
+
+/*        URI uri = URI.create("http://ya.praktikum.fvds.ru:8080/dev-day/register");
         Team team = new Team();
         team.setName("A-team");
         team.setGitHubUrl("url");
@@ -28,6 +26,6 @@ public class Main {
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
-        System.out.println(gson.toJson(team));
+        System.out.println(gson.toJson(team));*/
     }
 }
