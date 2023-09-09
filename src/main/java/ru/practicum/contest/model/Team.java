@@ -1,11 +1,13 @@
 package ru.practicum.contest.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -14,5 +16,5 @@ public class Team {
 
     private String gitHubUrl;
 
-    private List<TeamMember> teamMembers;
+    private List<TeamMember> participants;
 }

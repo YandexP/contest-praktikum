@@ -2,11 +2,11 @@ package ru.practicum.contest.model;
 
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class Token {
     private String name;
 

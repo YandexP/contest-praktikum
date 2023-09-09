@@ -1,16 +1,18 @@
 package ru.practicum.contest.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class TeamMemberDto {
     private String email;
 
-    private Integer cohort;
+    private String cohort;
 
     private String firstName;
 

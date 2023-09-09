@@ -1,12 +1,13 @@
 package ru.practicum.contest.dto;
 
-import lombok.*;
-import ru.practicum.contest.model.TeamMember;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -15,5 +16,5 @@ public class TeamDto {
 
     private String gitHubUrl;
 
-    private List<TeamMemberDto> teamMembers;
+    private List<TeamMemberDto> participants;
 }
