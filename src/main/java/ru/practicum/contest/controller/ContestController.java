@@ -31,8 +31,17 @@ public class ContestController {
     public Task2DtoResult sendDecoded(@RequestBody Task2DtoRequest task2DtoRequest,
                                       @RequestHeader("AUTH_TOKEN") String token) {
         log.info("Decoding: {}. Token: {}", task2DtoRequest, token);
-        Task2DtoResult task2DtoResponse = mainService.sendForDecode(task2DtoRequest, token);
+        Task2DtoResult task2DtoResponse = mainService.decode(task2DtoRequest, token);
         log.info("Decoded: {}.", task2DtoResponse);
         return task2DtoResponse;
+    }
+
+    @PostMapping("three")
+    public Task2DtoResult sendDecoded(@RequestBody body,
+                                      @RequestHeader("AUTH_TOKEN") String token) {
+        log.info("Decoding: {}. Token: {}", body, token);
+
+        log.info("Decoded: {}.", result);
+        return result;
     }
 }
