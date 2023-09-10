@@ -1,6 +1,6 @@
 package ru.practicum.contest.mapper;
 
-import ru.practicum.contest.dto.TokenDto;
+import ru.practicum.contest.dto.stepOne.TokenDto;
 import ru.practicum.contest.model.Token;
 
 public class TokenMapper {

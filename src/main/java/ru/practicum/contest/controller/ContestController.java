@@ -4,11 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.contest.dto.Task2DtoRequest;
-import ru.practicum.contest.dto.Task2DtoResult;
-import ru.practicum.contest.dto.TeamDto;
-import ru.practicum.contest.dto.TokenDto;
+import ru.practicum.contest.dto.stepTwo.Task2DtoRequest;
+import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
+import ru.practicum.contest.dto.stepOne.TeamDto;
+import ru.practicum.contest.dto.stepOne.TokenDto;
 import ru.practicum.contest.service.MainService;
 
 @RestController("/")
@@ -27,9 +28,10 @@ public class ContestController {
     }
 
     @PostMapping("decode")
-    public Task2DtoResult sendDecoded(@RequestBody Task2DtoRequest task2DtoRequest) {
-        log.info("Decoding: {}.", task2DtoRequest);
-        Task2DtoResult task2DtoResponse = mainService.sendForDecode(task2DtoRequest);
+    public Task2DtoResult sendDecoded(@RequestBody Task2DtoRequest task2DtoRequest,
+                                      @RequestHeader("AUTH_TOKEN") String token) {
+        log.info("Decoding: {}. Token: {}", task2DtoRequest, token);
+        Task2DtoResult task2DtoResponse = mainService.sendForDecode(task2DtoRequest, token);
         log.info("Decoded: {}.", task2DtoResponse);
         return task2DtoResponse;
     }

@@ -2,7 +2,7 @@ package ru.practicum.contest.repository;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import ru.practicum.contest.dto.Task2DtoResult;
+import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
 import ru.practicum.contest.model.Token;
 
 import java.io.File;

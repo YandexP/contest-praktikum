@@ -3,7 +3,11 @@ package ru.practicum.contest.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.practicum.contest.dto.*;
+import ru.practicum.contest.dto.stepOne.TeamDto;
+import ru.practicum.contest.dto.stepOne.TokenDto;
+import ru.practicum.contest.dto.stepTwo.Task2DtoDecoded;
+import ru.practicum.contest.dto.stepTwo.Task2DtoRequest;
+import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
 import ru.practicum.contest.mapper.TeamMapper;
 import ru.practicum.contest.mapper.TokenMapper;
 import ru.practicum.contest.model.Token;
@@ -28,11 +32,11 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public Task2DtoResult sendForDecode(Task2DtoRequest task2DtoRequest) {
-        log.info("Sending: {}.", task2DtoRequest);
+    public Task2DtoResult sendForDecode(Task2DtoRequest task2DtoRequest, String token) {
+        log.info("Decoding: {}.", task2DtoRequest);
         Task2DtoDecoded decoded = decode((task2DtoRequest));
         log.info("Decoded: {}.", decoded);
-        Task2DtoResult result = httpClient.sendDecoded(decoded);
+        Task2DtoResult result = httpClient.sendDecoded(decoded, token);
         log.info("Result: {}.", result);
         repository.saveDecoded(result);
         return result;

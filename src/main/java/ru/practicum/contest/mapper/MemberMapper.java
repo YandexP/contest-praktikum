@@ -1,6 +1,6 @@
 package ru.practicum.contest.mapper;
 
-import ru.practicum.contest.dto.TeamMemberDto;
+import ru.practicum.contest.dto.stepOne.TeamMemberDto;
 import ru.practicum.contest.model.TeamMember;
 
 public class MemberMapper {

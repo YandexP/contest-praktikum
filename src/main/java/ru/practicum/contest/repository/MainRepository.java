@@ -1,6 +1,6 @@
 package ru.practicum.contest.repository;
 
-import ru.practicum.contest.dto.Task2DtoResult;
+import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
 import ru.practicum.contest.model.Token;
 
 public interface MainRepository {

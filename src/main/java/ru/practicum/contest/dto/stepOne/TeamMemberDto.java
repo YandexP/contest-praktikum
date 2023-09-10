@@ -1,4 +1,4 @@
-package ru.practicum.contest.dto;
+package ru.practicum.contest.dto.stepOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

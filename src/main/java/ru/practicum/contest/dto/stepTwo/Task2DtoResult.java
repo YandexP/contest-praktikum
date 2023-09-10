@@ -1,4 +1,4 @@
-package ru.practicum.contest.dto;
+package ru.practicum.contest.dto.stepTwo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Task2DtoRequest {
-    private String encoded;
-    private Integer offset;
+public class Task2DtoResult {
+    private String nextTaskUrl;
+    private String message;
+    private Boolean completed;
 }

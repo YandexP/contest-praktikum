@@ -1,12 +1,12 @@
 package ru.practicum.contest.service;
 
-import ru.practicum.contest.dto.Task2DtoRequest;
-import ru.practicum.contest.dto.Task2DtoResult;
-import ru.practicum.contest.dto.TeamDto;
-import ru.practicum.contest.dto.TokenDto;
+import ru.practicum.contest.dto.stepTwo.Task2DtoRequest;
+import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
+import ru.practicum.contest.dto.stepOne.TeamDto;
+import ru.practicum.contest.dto.stepOne.TokenDto;
 
 public interface MainService {
     TokenDto addTeam(TeamDto tokenDto);
 
-    Task2DtoResult sendForDecode(Task2DtoRequest task2DtoRequest);
+    Task2DtoResult sendForDecode(Task2DtoRequest task2DtoRequest, String token);
 }

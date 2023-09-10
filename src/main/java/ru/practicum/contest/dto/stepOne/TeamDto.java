@@ -1,18 +1,20 @@
-package ru.practicum.contest.dto;
+package ru.practicum.contest.dto.stepOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TokenDto {
+public class TeamDto {
     private String name;
 
-    private String token;
+    private String gitHubUrl;
 
-    private String nextTaskUrl;
+    private List<TeamMemberDto> participants;
 }

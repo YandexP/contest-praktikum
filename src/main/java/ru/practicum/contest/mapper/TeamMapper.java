@@ -1,7 +1,7 @@
 package ru.practicum.contest.mapper;
 
-import ru.practicum.contest.dto.TeamDto;
-import ru.practicum.contest.dto.TeamMemberDto;
+import ru.practicum.contest.dto.stepOne.TeamDto;
+import ru.practicum.contest.dto.stepOne.TeamMemberDto;
 import ru.practicum.contest.model.Team;
 import ru.practicum.contest.model.TeamMember;
 
