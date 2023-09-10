@@ -1,9 +1,16 @@
-package ru.practicum.contest.dto.stepTwo;
+package ru.practicum.contest.service;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CaesarDecoder {
     private static final int ALPHABET_SIZE = 26;
 
-    public String decodeCaesar(String message, int offset) {
+    public String decipher(String message, int offset) {
+        return decodeCaesar(message, ALPHABET_SIZE - (offset % ALPHABET_SIZE));
+    }
+
+    private String decodeCaesar(String message, int offset) {
         StringBuilder result = new StringBuilder();
 
         for (char character : message.toCharArray()) {
@@ -13,15 +20,10 @@ public class CaesarDecoder {
                 int newAlphabetPosition = (originalAlphabetPosition + offset) % ALPHABET_SIZE;
                 char newCharacter = (char) (letterA + newAlphabetPosition);
                 result.append(newCharacter);
-            }
-            else {
+            } else {
                 result.append(character);
             }
         }
         return result.toString();
-    }
-
-    public String decipher(String message, int offset) {
-        return decodeCaesar(message, ALPHABET_SIZE - (offset % ALPHABET_SIZE));
     }
 }

@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-import ru.practicum.contest.dto.stepTwo.Task2DtoRequest;
-import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
 import ru.practicum.contest.dto.stepOne.TeamDto;
 import ru.practicum.contest.dto.stepOne.TokenDto;
+import ru.practicum.contest.dto.stepTwo.Task2DtoRequest;
+import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
 import ru.practicum.contest.service.MainService;
 
 @RestController("/")
