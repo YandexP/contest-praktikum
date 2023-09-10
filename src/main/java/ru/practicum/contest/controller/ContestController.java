@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import ru.practicum.contest.dto.Task2DtoRequest;
+import ru.practicum.contest.dto.Task2DtoResult;
 import ru.practicum.contest.dto.TeamDto;
 import ru.practicum.contest.dto.TokenDto;
 import ru.practicum.contest.service.MainService;
@@ -22,5 +24,13 @@ public class ContestController {
         TokenDto tokenDto = mainService.addTeam(teamDto);
         log.info("Token received: {}.", tokenDto);
         return tokenDto;
+    }
+
+    @PostMapping("decode")
+    public Task2DtoResult sendDecoded(@RequestBody Task2DtoRequest task2DtoRequest) {
+        log.info("Decoding: {}.", task2DtoRequest);
+        Task2DtoResult task2DtoResponse = mainService.sendForDecode(task2DtoRequest);
+        log.info("Decoded: {}.", task2DtoResponse);
+        return task2DtoResponse;
     }
 }
