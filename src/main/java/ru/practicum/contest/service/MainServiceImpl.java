@@ -39,21 +39,29 @@ public class MainServiceImpl implements MainService {
     }
 
     private Task2DtoDecoded decode(Task2DtoRequest task2DtoRequest) {
-        StringBuilder strBox = new StringBuilder();
-        char tmp;
+        int k = Integer.parseInt("-" + task2DtoRequest.getOffset());
+        String string = "";
         for (int i = 0; i < task2DtoRequest.getEncoded().length(); i++) {
-            tmp = task2DtoRequest.getEncoded().charAt(i);
-            if (Character.isLetter(task2DtoRequest.getEncoded().charAt(i))) {
-                tmp += task2DtoRequest.getOffset() % 26;
-                if (tmp > 'z')
-                    tmp = (char)(tmp % 'z' + 'a');
-                else if (tmp < 'a')
-                    tmp = (char)(tmp + 25);
+            char c = task2DtoRequest.getEncoded().charAt(i);
+            if (c >= 'a' && c <= 'z')// Если символ в строке строчный
+            {
+                c += k % 26;// мобильный ключ% 26 бит
+                if (c < 'a')
+                    c += 26;// слева налево
+                if (c > 'z')
+                    c -= 26;// направо
+            } else if (c >= 'A' && c <= 'Z')// Если символ в строке в верхнем регистре
+            {
+                c += k % 26;// мобильный ключ% 26 бит
+                if (c < 'A')
+                    c += 26;// слева налево
+                if (c > 'Z')
+                    c -= 26;// направо
             }
-            strBox.append(tmp);
+            string += c;// Объединяем расшифрованные символы в строку
         }
         return Task2DtoDecoded.builder()
-                .decoded(strBox.toString().toUpperCase())
+                .decoded(string)
                 .build();
     }
 }
