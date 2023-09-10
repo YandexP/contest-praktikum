@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.contest.dto.stepOne.TeamDto;
 import ru.practicum.contest.dto.stepOne.TokenDto;
+import ru.practicum.contest.dto.stepTwo.CaesarDecoder;
 import ru.practicum.contest.dto.stepTwo.Task2DtoDecoded;
 import ru.practicum.contest.dto.stepTwo.Task2DtoRequest;
 import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
