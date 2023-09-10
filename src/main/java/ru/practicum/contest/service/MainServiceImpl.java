@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.contest.dto.stepOne.TeamDto;
 import ru.practicum.contest.dto.stepOne.TokenDto;
+import ru.practicum.contest.dto.stepTwo.CaesarDecoder;
 import ru.practicum.contest.dto.stepTwo.Task2DtoDecoded;
 import ru.practicum.contest.dto.stepTwo.Task2DtoRequest;
 import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
@@ -43,27 +44,9 @@ public class MainServiceImpl implements MainService {
     }
 
     private Task2DtoDecoded decode(Task2DtoRequest task2DtoRequest) {
-        int k = Integer.parseInt("-" + task2DtoRequest.getOffset());
-        String string = "";
-        for (int i = 0; i < task2DtoRequest.getEncoded().length(); i++) {
-            char c = task2DtoRequest.getEncoded().charAt(i);
-            if (c >= 'a' && c <= 'z')// Если символ в строке строчный
-            {
-                c += k % 26;// мобильный ключ% 26 бит
-                if (c < 'a')
-                    c += 26;// слева налево
-                if (c > 'z')
-                    c -= 26;// направо
-            } else if (c >= 'A' && c <= 'Z')// Если символ в строке в верхнем регистре
-            {
-                c += k % 26;// мобильный ключ% 26 бит
-                if (c < 'A')
-                    c += 26;// слева налево
-                if (c > 'Z')
-                    c -= 26;// направо
-            }
-            string += c;// Объединяем расшифрованные символы в строку
-        }
+        CaesarDecoder caesarDecoder = new CaesarDecoder();
+        String string = caesarDecoder.decipher(task2DtoRequest.getEncoded(), task2DtoRequest.getOffset());
+
         return Task2DtoDecoded.builder()
                 .decoded(string)
                 .build();
