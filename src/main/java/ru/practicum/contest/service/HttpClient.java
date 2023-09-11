@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
+import ru.practicum.contest.dto.stepThree.PasswordGuess;
+import ru.practicum.contest.dto.stepThree.Task3DtoResult;
 import ru.practicum.contest.dto.stepTwo.Task2DtoDecoded;
 import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
 import ru.practicum.contest.model.Team;
@@ -68,6 +70,19 @@ public class HttpClient {
             log.info("Could not send request: {}", e.getMessage());
             throw e;
         }
+    }
+
+    public Task3DtoResult checkPassword(PasswordGuess passwordGuess, String token) {
+        String url = "/dev-day/task/3";
+
+        Map<String, String> headersMap = new HashMap<>();
+        headersMap.put("AUTH_TOKEN", token);
+        HttpHeaders headers = getHeaders(headersMap);
+        ResponseEntity<Task3DtoResult> response = makeAndSendRequest(HttpMethod.POST, url,
+                passwordGuess, Task3DtoResult.class, headers);
+        Task3DtoResult result = response.getBody();
+        log.info("Answer: {}.", result);
+        return result;
     }
 
     private <T, S> ResponseEntity<S> makeAndSendRequest(HttpMethod method, String path, @Nullable T body,
