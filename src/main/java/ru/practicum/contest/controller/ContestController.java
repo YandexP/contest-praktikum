@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.contest.dto.stepOne.TeamDto;
 import ru.practicum.contest.dto.stepOne.TokenDto;
+import ru.practicum.contest.dto.stepThree.Task3DtoResult;
 import ru.practicum.contest.dto.stepTwo.Task2DtoRequest;
 import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
 import ru.practicum.contest.service.MainService;
@@ -37,11 +38,10 @@ public class ContestController {
     }
 
     @PostMapping("three")
-    public Task2DtoResult sendDecoded(@RequestBody body,
-                                      @RequestHeader("AUTH_TOKEN") String token) {
-        log.info("Decoding: {}. Token: {}", body, token);
-
-        log.info("Decoded: {}.", result);
-        return result;
+    public Task3DtoResult sendDecoded(@RequestHeader("AUTH_TOKEN") String token) {
+        log.info("Guessing password. Token: {}", token);
+        Task3DtoResult task3DtoResult = mainService.checkPassword(token);
+        log.info("Result: {}", task3DtoResult);
+        return task3DtoResult;
     }
 }

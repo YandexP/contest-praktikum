@@ -2,8 +2,6 @@ package ru.practicum.contest.repository;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
-import ru.practicum.contest.model.Token;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 @Slf4j
 public class MainRepository {
 
-    public <T> void saveToTxt (T result) {
+    public <T> void saveToTxt(T result) {
         StringBuilder sb = new StringBuilder("src/main/resources/");
         sb.append(result.getClass().getSimpleName());
         sb.append(".txt");
