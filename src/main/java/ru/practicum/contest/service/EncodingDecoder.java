@@ -1,19 +1,26 @@
 package ru.practicum.contest.service;
 
+import ru.practicum.contest.dto.stepFour.Congratulation;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.SortedMap;
 
 public class EncodingDecoder {
-    public void printOutAnswers(String input) {
+    public List<Congratulation> getDecoded(String input) {
         SortedMap<String, Charset> charsets = Charset.availableCharsets();
+        List<Congratulation> result = new ArrayList<>();
         for (Charset charset : charsets.values()) {
             String decodedString = decode(input, charset);
             if (!containsInvalidCharacters(decodedString)) {
-                System.out.println(charset + ":" + decodedString);
+                result.add(new Congratulation(decodedString));
             }
         }
+        return result;
     }
+
     private String decode(String s, Charset set) {
         try {
             byte[] bytes = s.getBytes(set);

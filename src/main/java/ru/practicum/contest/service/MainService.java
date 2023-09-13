@@ -3,6 +3,8 @@ package ru.practicum.contest.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.practicum.contest.dto.stepFour.Congratulation;
+import ru.practicum.contest.dto.stepFour.Task4DtoResult;
 import ru.practicum.contest.dto.stepOne.TeamDto;
 import ru.practicum.contest.dto.stepOne.TokenDto;
 import ru.practicum.contest.dto.stepTwo.Task2DtoDecoded;
@@ -12,6 +14,8 @@ import ru.practicum.contest.mapper.TeamMapper;
 import ru.practicum.contest.mapper.TokenMapper;
 import ru.practicum.contest.model.Token;
 import ru.practicum.contest.repository.MainRepository;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -23,6 +27,8 @@ public class MainService {
     private final HttpClient httpClient;
 
     private final CaesarDecoder caesarDecoder;
+
+    private final EncodingDecoder encodingDecoder;
 
     public TokenDto addTeam(TeamDto teamDto) {
         log.info("Adding team: {}.", teamDto);
@@ -43,5 +49,20 @@ public class MainService {
         log.info("Result: {}.", result);
         repository.saveToTxt(result);
         return result;
+    }
+
+    public Task4DtoResult encodingDecode(Congratulation congratulation, String token) {
+        log.info("Decoding: {}.", congratulation.getCongratulation());
+        List<Congratulation> decoded = encodingDecoder.getDecoded(congratulation.getCongratulation());
+        for (Congratulation d : decoded) {
+            log.info("Sending: {}", d);
+            Task4DtoResult result = httpClient.sendDecoded(d, token);
+            log.info("Response: {}", result);
+            if (result.getCompleted()) {
+                repository.saveToTxt(result);
+                return result;
+            }
+        }
+        return null;
     }
 }

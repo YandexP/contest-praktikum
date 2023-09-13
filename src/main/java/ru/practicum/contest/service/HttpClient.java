@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
+import ru.practicum.contest.dto.stepFour.Congratulation;
+import ru.practicum.contest.dto.stepFour.Task4DtoResult;
 import ru.practicum.contest.dto.stepTwo.Task2DtoDecoded;
 import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
 import ru.practicum.contest.model.Team;
@@ -62,6 +64,26 @@ public class HttpClient {
                     task2DtoDecoded, Task2DtoResult.class, headers);
             Task2DtoResult result = response.getBody();
             log.info("Decoded received: {}.", result);
+
+            return result;
+        } catch (HttpStatusCodeException e) {
+            log.info("Could not send request: {}", e.getMessage());
+            throw e;
+        }
+    }
+
+    public Task4DtoResult sendDecoded(Congratulation decodedResult, String token) {
+        try {
+            String url = "/dev-day/task/4";
+
+            Map<String, String> headersMap = new HashMap<>();
+            headersMap.put("AUTH_TOKEN", token);
+            HttpHeaders headers = getHeaders(headersMap);
+
+            ResponseEntity<Task4DtoResult> response = makeAndSendRequest(HttpMethod.POST, url,
+                    decodedResult, Task4DtoResult.class, headers);
+            Task4DtoResult result = response.getBody();
+            log.info("Response received: {}.", result);
 
             return result;
         } catch (HttpStatusCodeException e) {
