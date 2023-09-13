@@ -6,6 +6,7 @@ import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.DefaultUriBuilderFactory;
@@ -73,23 +74,22 @@ public class HttpClient {
     }
 
     public Task4DtoResult sendDecoded(Congratulation decodedResult, String token) {
+        String url = "/dev-day/task/4";
+
+        Map<String, String> headersMap = new HashMap<>();
+        headersMap.put("AUTH_TOKEN", token);
+        HttpHeaders headers = getHeaders(headersMap);
+        ResponseEntity<Task4DtoResult> response;
         try {
-            String url = "/dev-day/task/4";
-
-            Map<String, String> headersMap = new HashMap<>();
-            headersMap.put("AUTH_TOKEN", token);
-            HttpHeaders headers = getHeaders(headersMap);
-
-            ResponseEntity<Task4DtoResult> response = makeAndSendRequest(HttpMethod.POST, url,
+            response = makeAndSendRequest(HttpMethod.POST, url,
                     decodedResult, Task4DtoResult.class, headers);
-            Task4DtoResult result = response.getBody();
-            log.info("Response received: {}.", result);
-
-            return result;
-        } catch (HttpStatusCodeException e) {
-            log.info("Could not send request: {}", e.getMessage());
-            throw e;
+        } catch (HttpClientErrorException e) {
+            return Task4DtoResult.builder().completed(false).build();
         }
+        Task4DtoResult result = response.getBody();
+        log.info("Response received: {}.", result);
+
+        return result;
     }
 
     private <T, S> ResponseEntity<S> makeAndSendRequest(HttpMethod method, String path, @Nullable T body,

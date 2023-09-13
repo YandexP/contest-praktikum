@@ -1,3 +1,4 @@
+/*
 package ru.practicum.contest.exception;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,7 @@ public class ErrorHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handleNotFoundException(final HttpStatusCodeException e) {
         log.error(Arrays.toString(e.getStackTrace()));
-        return new ErrorResponse(e.getStatusCode(), e.getCause().getMessage(), e.getMessage());
+        return new ErrorResponse(HttpStatus.BAD_REQUEST,"", e.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)
@@ -26,4 +27,4 @@ public class ErrorHandler {
         log.error(Arrays.toString(e.getStackTrace()));
         return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getCause().getMessage(), e.getMessage());
     }
-}
+}*/

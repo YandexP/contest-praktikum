@@ -54,15 +54,18 @@ public class MainService {
     public Task4DtoResult encodingDecode(Congratulation congratulation, String token) {
         log.info("Decoding: {}.", congratulation.getCongratulation());
         List<Congratulation> decoded = encodingDecoder.getDecoded(congratulation.getCongratulation());
-        for (Congratulation d : decoded) {
-            log.info("Sending: {}", d);
-            Task4DtoResult result = httpClient.sendDecoded(d, token);
+
+        Task4DtoResult task4DtoResult = httpClient.sendDecoded(decoded.get(0), token);
+        boolean completed = task4DtoResult.getCompleted();
+        int i = 1;
+        while (!completed && i < decoded.size()) {
+            log.info("Sending: {}", decoded.get(i));
+            Task4DtoResult result = httpClient.sendDecoded(decoded.get(i), token);
             log.info("Response: {}", result);
-            if (result.getCompleted()) {
-                repository.saveToTxt(result);
-                return result;
-            }
+            completed = result.getCompleted();
+            i++;
         }
-        return null;
+        repository.saveToTxt(task4DtoResult);
+        return task4DtoResult;
     }
 }
