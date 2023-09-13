@@ -40,7 +40,7 @@ public class ContestController {
         return task2DtoResponse;
     }
 
-    @PostMapping("decode")
+    @PostMapping("encode")
     public Task4DtoResult sendDecoded(@RequestBody Congratulation body,
                                       @RequestHeader("AUTH_TOKEN") String token) {
         log.info("Decoding: {}. Token: {}", body, token);

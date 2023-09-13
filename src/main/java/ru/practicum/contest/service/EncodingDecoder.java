@@ -1,5 +1,6 @@
 package ru.practicum.contest.service;
 
+import org.springframework.stereotype.Component;
 import ru.practicum.contest.dto.stepFour.Congratulation;
 
 import java.nio.charset.Charset;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 
+@Component
 public class EncodingDecoder {
     public List<Congratulation> getDecoded(String input) {
         SortedMap<String, Charset> charsets = Charset.availableCharsets();
