@@ -1,5 +1,6 @@
 package ru.practicum.contest.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import ru.practicum.contest.dto.stepFour.Congratulation;
 
@@ -7,17 +8,25 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedMap;
 
 @Component
+@Slf4j
 public class EncodingDecoder {
     public List<Congratulation> getDecoded(String input) {
-        SortedMap<String, Charset> charsets = Charset.availableCharsets();
+        List<Charset> charsets = new ArrayList<>(Charset.availableCharsets().values());
         List<Congratulation> result = new ArrayList<>();
-        for (Charset charset : charsets.values()) {
-            String decodedString = decode(input, charset);
-            if (!containsInvalidCharacters(decodedString)) {
-                result.add(new Congratulation(decodedString));
+        for (int i = 0; i < charsets.size(); i++) {
+            try {
+                byte[] bytes = input.getBytes(charsets.get(i));
+                for (int j = 1; j < charsets.size(); j++) {
+                    String decodedString = new String(bytes, charsets.get(j));
+                    if (decodedString.toLowerCase().contains("поздравляем")) {
+                        result.add(new Congratulation(decodedString));
+
+                    }
+                }
+            } catch (UnsupportedOperationException e) {
+                log.info(charsets.get(i).displayName() + " unsupported charset");
             }
         }
         return result;

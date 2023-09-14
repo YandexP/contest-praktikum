@@ -14,9 +14,9 @@ import ru.practicum.contest.dto.stepTwo.Task2DtoRequest;
 import ru.practicum.contest.dto.stepTwo.Task2DtoResult;
 import ru.practicum.contest.service.MainService;
 
-import java.lang.module.Configuration;
+import java.util.List;
 
-@RestController("/")
+@RestController
 @Slf4j
 @RequiredArgsConstructor
 public class ContestController {
@@ -31,7 +31,7 @@ public class ContestController {
         return tokenDto;
     }
 
-    @PostMapping("decode")
+    @PostMapping("/decode")
     public Task2DtoResult sendDecoded(@RequestBody Task2DtoRequest task2DtoRequest,
                                       @RequestHeader("AUTH_TOKEN") String token) {
         log.info("Decoding: {}. Token: {}", task2DtoRequest, token);
@@ -40,11 +40,20 @@ public class ContestController {
         return task2DtoResponse;
     }
 
-    @PostMapping("encode")
+    @PostMapping("/encode")
     public Task4DtoResult sendDecoded(@RequestBody Congratulation body,
                                       @RequestHeader("AUTH_TOKEN") String token) {
         log.info("Decoding: {}. Token: {}", body, token);
         Task4DtoResult result = mainService.encodingDecode(body, token);
+        log.info("Decoded: {}.", result);
+        return result;
+    }
+
+    @PostMapping("/testencode")
+    public List<Congratulation> testEncode(@RequestBody Congratulation body,
+                                           @RequestHeader("AUTH_TOKEN") String token) {
+        log.info("Decoding: {}. Token: {}", body, token);
+        List<Congratulation> result = mainService.testEncode(body, token);
         log.info("Decoded: {}.", result);
         return result;
     }

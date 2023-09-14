@@ -68,4 +68,8 @@ public class MainService {
         repository.saveToTxt(task4DtoResult);
         return task4DtoResult;
     }
+
+    public List<Congratulation> testEncode(Congratulation congratulation, String token) {
+        return encodingDecoder.getDecoded(congratulation.getCongratulation());
+    }
 }
